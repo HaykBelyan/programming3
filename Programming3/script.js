@@ -1,21 +1,4 @@
-let matrix = generate(40);
-let side = 15;
-let grassArr = [];
-let grassEaterArr = [];
-let PredatorArr = [];
-let BombArr = [];
-let MiniEaterArr = [];
-var socket = io();
-function generate(matLen) {
-    let matrix = [];
-    for (let i = 0; i < matLen; i++) {
-        matrix[i] = [];
-        for (let j = 0; j < matLen; j++) {
-            matrix[i][j] = 0;
-        }
-    }
-    return matrix;
-}
+side = 15;
 function createLivCr(n, index, livCrArr, livCrCLass) {
     for (let i = 0; i <= n; i++) {
         let x = Math.floor(Math.random() * (matrix.length));
@@ -73,31 +56,6 @@ function createLivCr(n, index, livCrArr, livCrCLass) {
     }
 }
 function setup() {
-
-    for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[0].length; x++) {
-            if (matrix[y][x] == 1) {
-                let gr = new Grass(x, y);
-                grassArr.push(gr);
-            }
-            else if (matrix[y][x] == 2) {
-                let grEater = new GrassEater(x, y);
-                grassEaterArr.push(grEater)
-            }
-            else if (matrix[y][x] == 3) {
-                let pr = new Predator(x, y);
-                PredatorArr.push(pr);
-            }
-            else if (matrix[y][x] == 4) {
-                let bmb = new Bomb(x, y);
-                BombArr.push(bmb);
-            }
-            else if (matrix[y][x] == 5) {
-                let minieater = new MiniEater(x, y)
-                MiniEaterArr.push(minieater);
-            }
-        }
-    }
     frameRate(10);
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
@@ -130,3 +88,6 @@ function dr() {
         }
     }
 }
+setInterval(function(){
+    socket.on('matrixUpd', dr)
+},1000)
