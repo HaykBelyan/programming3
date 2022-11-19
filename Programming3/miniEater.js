@@ -1,4 +1,5 @@
-class MiniEater extends LivingCreature{
+LC = require("./LivingCreature")
+module.exports = class MiniEater extends LC{
     
     search(character){
         this.getNewCoordinates();

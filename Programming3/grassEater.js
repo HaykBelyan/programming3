@@ -1,4 +1,5 @@
-class GrassEater extends LivingCreature{
+LC = require("./LivingCreature")
+module.exports = class GrassEater extends LC{
     constructor(x, y) {
         super(x,y);
         this.directions = [];

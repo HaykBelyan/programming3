@@ -1,4 +1,5 @@
-class Grass extends LivingCreature{
+LC = require("./LivingCreature")
+module.exports = class Grass extends LC{
     
     search(character){
         this.getNewCoordinates();

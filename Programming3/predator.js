@@ -1,4 +1,5 @@
-class Predator extends LivingCreature{
+LC = require("./LivingCreature")
+module.exports = class Predator extends LC{
     constructor(x, y) {
         super(x,y);
         this.directions = [];

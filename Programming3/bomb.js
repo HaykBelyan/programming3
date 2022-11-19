@@ -1,4 +1,5 @@
-class Bomb extends LivingCreature {
+LC = require("./LivingCreature")
+module.exports = class Bomb extends LC{
     constructor(x, y) {
         super(x, y);
         this.directions = [

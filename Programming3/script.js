@@ -5,6 +5,7 @@ let grassEaterArr = [];
 let PredatorArr = [];
 let BombArr = [];
 let MiniEaterArr = [];
+var socket = io();
 function generate(matLen) {
     let matrix = [];
     for (let i = 0; i < matLen; i++) {
@@ -102,7 +103,7 @@ function setup() {
     background('#acacac');
 }
 
-function draw() {
+function dr() {
     clear();
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -126,26 +127,6 @@ function draw() {
                 fill("pink")
             }
             rect(x * side, y * side, side, side);
-
-            /*
-            fill("blue")
-            text(x+" "+y, x*side+side/2,y*side+side/2)
-            */
         }
-    }
-    for (let i in grassArr) {
-        grassArr[i].mul();
-    }
-    for (let i in grassEaterArr) {
-        grassEaterArr[i].eat();
-    }
-    for (let i in PredatorArr) {
-        PredatorArr[i].eat();
-    }
-    for (let i in BombArr) {
-        BombArr[i].explode();
-    }
-    for (let i in MiniEaterArr) {
-        MiniEaterArr[i].eat();
     }
 }
