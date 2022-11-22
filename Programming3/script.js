@@ -1,67 +1,12 @@
+var socket = io();
 side = 15;
-function createLivCr(n, index, livCrArr, livCrCLass) {
-    for (let i = 0; i <= n; i++) {
-        let x = Math.floor(Math.random() * (matrix.length));
-        let y = Math.floor(Math.random() * (matrix[0].length));
-        if(index == 1){
-        if (matrix[y][x] == 0) {
-            matrix[y][x] = index;
-            let livCr = new livCrCLass(x, y)
-            livCrArr.push(livCr)
-        }
-        else {
-            createLivCr(n, index, livCrArr, livCrCLass);
-        }
-    }
-    else if(index == 2){
-        if (matrix[y][x] == 0 || matrix[y][x] == 1) {
-            matrix[y][x] = index;
-            let livCr = new livCrCLass(x, y)
-            livCrArr.push(livCr)
-        }
-        else {
-            createLivCr(n, index, livCrArr, livCrCLass);
-        }
-    }
-    else if(index == 3){
-        if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2) {
-            matrix[y][x] = index;
-            let livCr = new livCrCLass(x, y)
-            livCrArr.push(livCr)
-        }
-        else {
-            createLivCr(n, index, livCrArr, livCrCLass);
-        }
-    }
-    else if(index == 4){
-        if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2 || matrix[y][x] == 3) {
-            matrix[y][x] = index;
-            let livCr = new livCrCLass(x, y)
-            livCrArr.push(livCr)
-        }
-        else {
-            createLivCr(n, index, livCrArr, livCrCLass);
-        }
-    }
-    else if(index == 5){
-        if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2 || matrix[y][x] == 3 || matrix[y][x] == 4) {
-            matrix[y][x] = index;
-            let livCr = new livCrCLass(x, y)
-            livCrArr.push(livCr)
-        }
-        else {
-            createLivCr(n, index, livCrArr, livCrCLass);
-        }
-    }
-    }
-}
 function setup() {
     frameRate(10);
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    createCanvas(40 * side, 40 * side);
     background('#acacac');
 }
-
-function dr() {
+socket.on("matrixUpd", matrix);
+function dr(matrix) {
     clear();
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -88,6 +33,22 @@ function dr() {
         }
     }
 }
+
 setInterval(function(){
     socket.on('matrixUpd', dr)
 },1000)
+function GrassCreator(){
+    socket.emit("GrassCreator")
+}
+function GrassEaterCreator(){
+    socket.emit("GrassEaterCreator")
+}
+function PredatorCreator(){
+    socket.emit("PredatorCreator")
+}
+function BombCreator(){
+    socket.emit("BombCreator")
+}
+function MiniEaterCreator(){
+    socket.emit("MiniEaterCreator")
+}
