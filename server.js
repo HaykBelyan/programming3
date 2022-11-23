@@ -4,7 +4,11 @@ var app = express();
 
 var server = require('http').createServer(app);
 
-var io = require('socket.io')(server);
+var io = require('socket.io')(server, {
+    cors:{
+        origin: "*"
+    }
+});
 
 app.use(express.static("Programming3"));
 
@@ -20,7 +24,68 @@ server.listen(3000, function () {
     console.log("Server is running on port 3000");
 
 });;
-
+function createGrass() {
+    for(let i = 0; i<=4; i++){
+    let x = Math.floor(Math.random() * (matrix.length));
+    let y = Math.floor(Math.random() * (matrix[0].length));
+    if (matrix[y][x] == 0) {
+        matrix[y][x] = 1;
+        let gr = new Grass(x, y)
+        grassArr.push(gr)
+    }
+}
+}
+function createGrassEater(n) {
+    for(let i = 0; i<=n; i++){
+    let x = Math.floor(Math.random() * (matrix.length));
+    let y = Math.floor(Math.random() * (matrix[0].length));
+    if (matrix[y][x] == 0 || matrix[y][x] == 1) {
+        matrix[y][x] = 2;
+        let gre = new GrassEater(x, y)
+        grassEaterArr.push(gre)
+    }
+    else {
+        createGrassEater(n);
+    }
+}
+}
+function createPredator(n) {
+    for(let i = 0; i<=n; i++){
+    let x = Math.floor(Math.random() * (matrix.length));
+    let y = Math.floor(Math.random() * (matrix[0].length));
+    if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2) {
+        matrix[y][x] = 3;
+        let pr = new Predator(x, y)
+        PredatorArr.push(pr)
+    }
+    else {
+        createPredator(n);
+    }
+}
+}
+function createBomb(n) {
+    for(let i = 0; i<=n; i++){
+    let x = Math.floor(Math.random() * (matrix.length));
+    let y = Math.floor(Math.random() * (matrix[0].length));
+        matrix[y][x] = 4;
+        let bmb = new Bomb(x, y);
+        BombArr.push(bmb);
+    }
+}
+function createMiniEater(n) {
+    for(let i = 0; i<=n; i++){
+    let x = Math.floor(Math.random() * (matrix.length));
+    let y = Math.floor(Math.random() * (matrix[0].length));
+    if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2 || matrix[y][x] == 3) {
+        matrix[y][x] = 5;
+        let minieater = new MiniEater(x, y)
+        MiniEaterArr.push(minieater)
+    }
+    else {
+        createMiniEater(n);
+    }
+}
+}
 var Grass = require("./Programming3/grass")
 var GrassEater = require("./Programming3/grassEater")
 var Predator = require("./Programming3/predator")
@@ -150,11 +215,12 @@ function game() {
 }
 setInterval(game, 1000);
 
+
 io.on("connection", function (socket) {
     updateObjects(matrix);
-    socket.on('GrassCreator', createLivCr(5, 1, grassArr, Grass))
-    socket.on('GrassEaterCreator', createLivCr(5, 2, grassEaterArr, GrassEater))
-    socket.on('PredatorCreator', createLivCr(5, 3, PredatorArr, Predator))
-    socket.on('BombCreator', createLivCr(5, 4, BombArr, Bomb))
-    socket.on('MiniEaterCreator', createLivCr(5, 5, MiniEaterArr, MiniEater))
+    socket.on('GrassCreator', createGrass)
+    socket.on('GrassEaterCreator', createGrassEater)
+    socket.on('PredatorCreator', createPredator)
+    socket.on('BombCreator', createBomb)
+    socket.on('MiniEaterCreator', createMiniEater)
 })

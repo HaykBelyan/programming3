@@ -1,11 +1,13 @@
 var socket = io();
 side = 15;
+
 function setup() {
     frameRate(10);
     createCanvas(40 * side, 40 * side);
     background('#acacac');
 }
-socket.on("matrixUpd", matrix);
+
+
 function dr(matrix) {
     clear();
     for (var y = 0; y < matrix.length; y++) {
