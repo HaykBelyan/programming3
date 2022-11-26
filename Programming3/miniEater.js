@@ -15,7 +15,7 @@ module.exports = class MiniEater extends LC{
         let found1 = this.search(2);
         let foundRand1 = random(found1);
         let found2 = this.search(3);
-        let foundRand2 = random(found2);
+        let foundRand2 = this.random(found2);
         if (this.energy > 0 && foundRand) {
             this.energy--;
             let x = foundRand[0];

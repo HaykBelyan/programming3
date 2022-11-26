@@ -18,7 +18,7 @@ module.exports = class GrassEater extends LC{
        }
     eat() {
         let found = this.search(1);
-        let foundRand = random(found);
+        let foundRand = this.random(found);
         if (foundRand) {
             this.energy++;
             let x = foundRand[0];

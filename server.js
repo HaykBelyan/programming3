@@ -6,19 +6,19 @@ var server = require('http').createServer(app);
 
 var io = require('socket.io')(server);
 
-var Grass = require("./Programming3/grass")
-var GrassEater = require("./Programming3/grassEater")
-var Predator = require("./Programming3/predator")
-var MiniEater = require("./Programming3/miniEater")
-var Bomb = require("./Programming3/bomb")
+Grass = require("./Programming3/grass")
+GrassEater = require("./Programming3/grassEater")
+Predator = require("./Programming3/predator")
+MiniEater = require("./Programming3/miniEater")
+Bomb = require("./Programming3/bomb")
 
 
-let matrix = generate(40);
-let grassArr = [];
-let grassEaterArr = [];
-let PredatorArr = [];
-let BombArr = [];
-let MiniEaterArr = [];
+matrix = generate(40);
+grassArr = [];
+grassEaterArr = [];
+PredatorArr = [];
+BombArr = [];
+MiniEaterArr = [];
 
 app.use(express.static("Programming3"));
 
@@ -29,7 +29,7 @@ app.get("/", function (req, res) {
 });
 
 
-server.listen(3000, function () {
+server.listen(3002, function () {
 
     console.log("Server is running on port 3000");
 
@@ -37,7 +37,7 @@ server.listen(3000, function () {
 io.on('connection', function(socket){
     console.log('user connected!');
 })
-function createGrass(matrix) {
+function createGrass() {
     for (let i = 0; i <= 4; i++) {
         let x = Math.floor(Math.random() * (matrix.length));
         let y = Math.floor(Math.random() * (matrix[0].length));
@@ -48,48 +48,48 @@ function createGrass(matrix) {
         }
     }
 }
-// function createGrassEater() {
-//     for (let i = 0; i <= 4; i++) {
-//         let x = Math.floor(Math.random() * (matrix.length));
-//         let y = Math.floor(Math.random() * (matrix[0].length));
-//         if (matrix[y][x] == 0 || matrix[y][x] == 1) {
-//             matrix[y][x] = 2;
-//             let gre = new GrassEater(x, y)
-//             grassEaterArr.push(gre)
-//         }
-//     }
-// }
-// function createPredator() {
-//     for (let i = 0; i <= 4; i++) {
-//         let x = Math.floor(Math.random() * (matrix.length));
-//         let y = Math.floor(Math.random() * (matrix[0].length));
-//         if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2) {
-//             matrix[y][x] = 3;
-//             let pr = new Predator(x, y)
-//             PredatorArr.push(pr)
-//         }
-//     }
-// }
-// function createBomb() {
-//     for (let i = 0; i <= 4; i++) {
-//         let x = Math.floor(Math.random() * (matrix.length));
-//         let y = Math.floor(Math.random() * (matrix[0].length));
-//         matrix[y][x] = 4;
-//         let bmb = new Bomb(x, y);
-//         BombArr.push(bmb);
-//     }
-// }
-// function createMiniEater() {
-//     for (let i = 0; i <= 4; i++) {
-//         let x = Math.floor(Math.random() * (matrix.length));
-//         let y = Math.floor(Math.random() * (matrix[0].length));
-//         if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2 || matrix[y][x] == 3) {
-//             matrix[y][x] = 5;
-//             let minieater = new MiniEater(x, y)
-//             MiniEaterArr.push(minieater)
-//         }
-//     }
-// }
+function createGrassEater() {
+    for (let i = 0; i <= 4; i++) {
+        let x = Math.floor(Math.random() * (matrix.length));
+        let y = Math.floor(Math.random() * (matrix[0].length));
+        if (matrix[y][x] == 0 || matrix[y][x] == 1) {
+            matrix[y][x] = 2;
+            let gre = new GrassEater(x, y)
+            grassEaterArr.push(gre)
+        }
+    }
+}
+function createPredator() {
+    for (let i = 0; i <= 4; i++) {
+        let x = Math.floor(Math.random() * (matrix.length));
+        let y = Math.floor(Math.random() * (matrix[0].length));
+        if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2) {
+            matrix[y][x] = 3;
+            let pr = new Predator(x, y)
+            PredatorArr.push(pr)
+        }
+    }
+}
+function createBomb() {
+    for (let i = 0; i <= 4; i++) {
+        let x = Math.floor(Math.random() * (matrix.length));
+        let y = Math.floor(Math.random() * (matrix[0].length));
+        matrix[y][x] = 4;
+        let bmb = new Bomb(x, y);
+        BombArr.push(bmb);
+    }
+}
+function createMiniEater() {
+    for (let i = 0; i <= 4; i++) {
+        let x = Math.floor(Math.random() * (matrix.length));
+        let y = Math.floor(Math.random() * (matrix[0].length));
+        if (matrix[y][x] == 0 || matrix[y][x] == 1 || matrix[y][x] == 2 || matrix[y][x] == 3) {
+            matrix[y][x] = 5;
+            let minieater = new MiniEater(x, y)
+            MiniEaterArr.push(minieater)
+        }
+    }
+}
 
 function generate(matLen) {
     let matrix = [];
@@ -129,6 +129,13 @@ function updateObjects(matrix) {
     }
     io.sockets.emit('matrixUpd', matrix)
 }
+stats = {
+    grass: 0,
+    grassEater: 0,
+    predator: 0,
+    bomb: 0,
+    miniEater: 0,
+}
 
 function game() {
     for (let i in grassArr) {
@@ -147,14 +154,20 @@ function game() {
         MiniEaterArr[i].eat();
     }
     io.sockets.emit('matrixUpd', matrix)
+    stats.grass = grassArr.length;
+    stats.grassEater = grassEaterArr.length;
+    stats.predator = PredatorArr.length;
+    stats.bomb = BombArr.length;
+    stats.miniEater = MiniEaterArr.length;
+    console.log(stats);
 }
-setInterval(game, 1000);
+setInterval(game, 300);
 io.on("connection", function (socket) {
     updateObjects(matrix);
     socket.on('GrassCreator', createGrass)
-    // socket.on('GrassEaterCreator', createGrassEater)
-    // socket.on('PredatorCreator', createPredator)
-    // socket.on('BombCreator', createBomb)
-    // socket.on('MiniEaterCreator', createMiniEater)
+    socket.on('GrassEaterCreator', createGrassEater)
+    socket.on('PredatorCreator', createPredator)
+    socket.on('BombCreator', createBomb)
+    socket.on('MiniEaterCreator', createMiniEater)
 })
 

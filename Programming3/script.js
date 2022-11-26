@@ -2,7 +2,7 @@ var socket = io();
 side = 15;
 
 function setup() {
-    frameRate(10);
+    frameRate(30);
     createCanvas(40 * side, 40 * side);
     background('#acacac');
 }
@@ -38,10 +38,10 @@ function dr(matrix) {
 
 setInterval(function(){
     socket.on('matrixUpd', dr)
-},1000)
-function GrassCreator(matrix){
+},300)
+function GrassCreator(){
     console.log("button clicked!");
-    socket.emit("GrassCreator", matrix)
+    socket.emit("GrassCreator")
 }
 function GrassEaterCreator(){
     socket.emit("GrassEaterCreator")

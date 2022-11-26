@@ -17,9 +17,9 @@ module.exports = class Predator extends LC{
     }
     eat() {
         let found = this.search(1);
-        let foundRand = random(found);
+        let foundRand = this.random(found);
         let found1 = this.search(2);
-        let foundRand1 = random(found1);
+        let foundRand1 = this.random(found1);
         if (foundRand) {
             this.energy++;
             let x = foundRand[0];

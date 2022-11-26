@@ -7,7 +7,7 @@ module.exports = class Grass extends LC{
     }
     mul() {
         let found = this.search(0);
-        let foundRand = random(found);
+        let foundRand = this.random(found);
 
         this.multiplay++;
         if (this.multiplay >= 10 && foundRand) {

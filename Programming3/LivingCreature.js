@@ -19,7 +19,7 @@ module.exports = class LivingCreature {
     }
     mul(num, charArr, className, energy) {
         let found = this.search(0);
-        let foundRand = random(found);
+        let foundRand = this.random(found);
         if (foundRand) {
             let x = foundRand[0];
             let y = foundRand[1];
@@ -56,7 +56,7 @@ module.exports = class LivingCreature {
     }
     move(num) {
         let found = this.search(0);
-        let foundRand = random(found);
+        let foundRand = this.random(found);
         if (foundRand && this.energy > 0) {
             let x = foundRand[0];
             let y = foundRand[1];
@@ -77,4 +77,7 @@ module.exports = class LivingCreature {
             }
         }
     }
+    random(found) {
+        return found[Math.floor(Math.random()*found.length)]
+        }
 }
