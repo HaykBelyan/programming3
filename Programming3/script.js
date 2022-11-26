@@ -39,8 +39,9 @@ function dr(matrix) {
 setInterval(function(){
     socket.on('matrixUpd', dr)
 },1000)
-function GrassCreator(){
-    socket.emit("GrassCreator")
+function GrassCreator(matrix){
+    console.log("button clicked!");
+    socket.emit("GrassCreator", matrix)
 }
 function GrassEaterCreator(){
     socket.emit("GrassEaterCreator")
