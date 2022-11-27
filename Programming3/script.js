@@ -2,14 +2,26 @@ var socket = io();
 side = 15;
 
 function setup() {
-    frameRate(30);
-    createCanvas(40 * side, 40 * side);
+    frameRate(60);
+    createCanvas(20 * side, 20 * side);
     background('#acacac');
 }
 
+function writeStats(statsObject){
+    GrassCount = statsObject.GrassCount
+    GrassEaterCount = statsObject.GrassEaterCount
+    PredatorCount = statsObject.PredatorCount
+    MiniEaterCount = statsObject.MiniEaterCount
+    document.getElementById("GrassCount").innerText = GrassCount.toString();
+    document.getElementById("GrassEaterCount").innerText = GrassEaterCount.toString();
+    document.getElementById("PredatorCount").innerText = PredatorCount.toString();
+    document.getElementById("MiniEaterCount").innerText = MiniEaterCount.toString();
 
-function dr(matrix) {
-    clear();
+}
+function dr(data) {
+    var matrix = data.matrix;
+    var weather = data.weather;
+    document.getElementById("weather").innerText = "Wather: "+weather.toString();
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
 
@@ -17,7 +29,15 @@ function dr(matrix) {
                 fill("#acacac");
             }
             else if (matrix[y][x] == 1) {
+                if(weather == "spring"){
                 fill("green");
+                }
+                else if(weather == "autumn"){
+                    fill("orange");
+                }
+                else{
+                    fill("white")
+                }
             }
             else if (matrix[y][x] == 2) {
                 fill("yellow");
@@ -36,11 +56,10 @@ function dr(matrix) {
     }
 }
 
-setInterval(function(){
-    socket.on('matrixUpd', dr)
-},300)
+socket.on('matrixUpd', dr)
+socket.on('statsUpdate', writeStats);
+
 function GrassCreator(){
-    console.log("button clicked!");
     socket.emit("GrassCreator")
 }
 function GrassEaterCreator(){

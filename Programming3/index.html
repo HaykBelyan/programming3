@@ -3,8 +3,8 @@
 <head>
    <link rel="stylesheet" href="style.css">
    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
    <!-- <script src="script.js"></script>
    <script src="class.js"></script>
    <script src="grass.js"></script>
@@ -12,19 +12,28 @@
    <script src="miniEater.js"></script>
    <script src="predator.js"></script>
    <script src="bomb.js"></script> -->
-<script src="socket.io/socket.io.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
-<script src="script.js"></script>
+   <script src="socket.io/socket.io.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+   <script src="script.js"></script>
 </head>
 
 <body>
-   <div class="btns">
-   <button id="btn1" class="btn" onclick="GrassCreator()">Create grass</button>
-   <button id="btn2" class="btn" onclick="GrassEaterCreator()">Create grass eater</button>
-   <button id="btn3"  class="btn" onclick="PredatorCreator()">Create predator</button>
-   <button id="btn4"  class="btn" onclick="BombCreator()">Create bomb</button>
-   <button id="btn5"  class="btn" onclick="MiniEaterCreator()">Create Minieater</button>
-</div>
+   <div class="main">
+      <div class="info">
+         <p id="weather"></p>
+         <p id="GrassCount"></p>
+         <p id="GrassEaterCount"></p>
+         <p id="PredatorCount"></p>
+         <p id="MiniEaterCount"></p>
+      </div>
+      <div class="btns">
+         <button id="btn1" class="btn" onclick="GrassCreator()">Create grass</button>
+         <button id="btn2" class="btn" onclick="GrassEaterCreator()">Create grass eater</button>
+         <button id="btn3" class="btn" onclick="PredatorCreator()">Create predator</button>
+         <button id="btn4" class="btn" onclick="BombCreator()">Create bomb</button>
+         <button id="btn5" class="btn" onclick="MiniEaterCreator()">Create Minieater</button>
+      </div>
+   </div>
 </body>
 
 </html>

@@ -5,7 +5,7 @@ var app = express();
 var server = require('http').createServer(app);
 
 var io = require('socket.io')(server);
-
+var fs = require('fs');
 Grass = require("./Programming3/grass")
 GrassEater = require("./Programming3/grassEater")
 Predator = require("./Programming3/predator")
@@ -13,12 +13,16 @@ MiniEater = require("./Programming3/miniEater")
 Bomb = require("./Programming3/bomb")
 
 
-matrix = generate(40);
+matrix = generate(20);
 grassArr = [];
 grassEaterArr = [];
 PredatorArr = [];
 BombArr = [];
 MiniEaterArr = [];
+weathers = ["Spring","Autumn", "Winter"]
+currentWeather = "Spring"
+index = 0
+stats = [];
 
 app.use(express.static("Programming3"));
 
@@ -29,7 +33,7 @@ app.get("/", function (req, res) {
 });
 
 
-server.listen(3002, function () {
+server.listen(3000, function () {
 
     console.log("Server is running on port 3000");
 
@@ -129,12 +133,24 @@ function updateObjects(matrix) {
     }
     io.sockets.emit('matrixUpd', matrix)
 }
-stats = {
-    grass: 0,
-    grassEater: 0,
-    predator: 0,
-    bomb: 0,
-    miniEater: 0,
+function changeWeather(){
+    if(index>2){
+        index = 0
+    }
+    currentWeather = weathers[index];
+    index++
+}
+function updStats() {
+    var fileName = 'stats.json';
+    var statsObject = {
+        'GrassCount': grassArr.length,
+        'GrassEaterCount': grassEaterArr.length,
+        'PredatorCount': PredatorArr.length,
+        'MiniEaterCount': MiniEaterArr.length
+    }
+    stats.push(statsObject);
+    fs.writeFileSync(fileName, JSON.stringify(stats, null, 4));
+    io.sockets.emit('statsUpdate', statsObject);
 }
 
 function game() {
@@ -153,16 +169,24 @@ function game() {
     for (let i in MiniEaterArr) {
         MiniEaterArr[i].eat();
     }
-    io.sockets.emit('matrixUpd', matrix)
-    stats.grass = grassArr.length;
-    stats.grassEater = grassEaterArr.length;
-    stats.predator = PredatorArr.length;
-    stats.bomb = BombArr.length;
-    stats.miniEater = MiniEaterArr.length;
-    console.log(stats);
+    data = {
+        'weather': currentWeather,
+        'matrix': matrix
+    }
+    io.sockets.emit('matrixUpd', data)
+    updStats();
 }
-setInterval(game, 300);
 io.on("connection", function (socket) {
+    matrix = generate(20);
+    grassArr = [];
+    grassEaterArr = [];
+    PredatorArr = [];
+    BombArr = [];
+    MiniEaterArr = [];
+    weathers = ["spring","autumn", "winter"]
+    currentWeather = ""
+    index = 0
+    stats = [];
     updateObjects(matrix);
     socket.on('GrassCreator', createGrass)
     socket.on('GrassEaterCreator', createGrassEater)
@@ -170,4 +194,5 @@ io.on("connection", function (socket) {
     socket.on('BombCreator', createBomb)
     socket.on('MiniEaterCreator', createMiniEater)
 })
-
+setInterval(game, 75);
+setInterval(changeWeather, 4000)
