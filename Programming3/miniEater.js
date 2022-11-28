@@ -16,6 +16,8 @@ module.exports = class MiniEater extends LC{
         let foundRand1 = this.random(found1);
         let found2 = this.search(3);
         let foundRand2 = this.random(found2);
+        let found3 = this.search(6);
+        let foundRand3 = this.random(found3);
         if (this.energy > 0 && foundRand) {
             this.energy--;
             let x = foundRand[0];
@@ -60,6 +62,21 @@ module.exports = class MiniEater extends LC{
                     break;
                 }
             }
+        }
+        else if (foundRand3) {
+            let x = foundRand3[0];
+            let y = foundRand3[1];
+            matrix[y][x] = 5;
+            matrix[this.y][this.x] = 0;
+            this.x = x;
+            this.y = y;
+            for (var i in EnergyArr) {
+                if (x == EnergyArr[i].x && y == EnergyArr[i].y) {
+                    EnergyArr.splice(i, 1);
+                    break;
+                }
+            }
+            this.die();
         }  else if(this.energy>0){
             this.move();
         }

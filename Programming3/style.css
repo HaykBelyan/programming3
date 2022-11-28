@@ -66,6 +66,12 @@ html{
 #btn4:hover{
     background-color: rgb(27, 27, 27);
 }
+#btn6{
+    background-color: rgb(0, 204, 255);
+}
+#btn6:hover{
+    background-color: rgb(0, 170, 212);
+}
 
 body{
     display: flex;
@@ -113,7 +119,7 @@ body{
     transform:translate(-50%,-50%) scale(0);
     background:#fff;
     width:500px;
-    height:350px;
+    height:400px;
     z-index:2;
     text-align:center;
     padding:20px;
@@ -188,6 +194,10 @@ body{
 }
 #MiniEaterCount{
     background-color: lightcoral;
+    border-radius: 5px;
+}
+#EnergyCount{
+    background-color: lightskyblue;
     border-radius: 5px;
 }
 #weather{

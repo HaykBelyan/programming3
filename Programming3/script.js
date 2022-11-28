@@ -14,11 +14,12 @@ function writeStats(statsObject){
     GrassEaterCount = statsObject.GrassEaterCount
     PredatorCount = statsObject.PredatorCount
     MiniEaterCount = statsObject.MiniEaterCount
+    EnergyCount = statsObject.EnergyCount
     document.getElementById("GrassCount").innerText = "Grass: "+GrassCount.toString();
     document.getElementById("GrassEaterCount").innerText = "GrassEater: "+GrassEaterCount.toString();
     document.getElementById("PredatorCount").innerText = "Predator: "+PredatorCount.toString();
     document.getElementById("MiniEaterCount").innerText = "MiniEater: "+MiniEaterCount.toString();
-
+    document.getElementById("EnergyCount").innerText = "Energy: "+EnergyCount.toString();
 }
 function dr(data) {
     var matrix = data.matrix;
@@ -53,6 +54,9 @@ function dr(data) {
             else if (matrix[y][x] == 5) {
                 fill("pink")
             }
+            else if (matrix[y][x] == 6) {
+                fill("lightblue")
+            }
             rect(x * side, y * side, side, side);
         }
     }
@@ -75,6 +79,9 @@ function BombCreator(){
 }
 function MiniEaterCreator(){
     socket.emit("MiniEaterCreator")
+}
+function EnergyCreator(){
+    socket.emit("EnergyCreator")
 }
 function Popup(){
     socket.emit("popup")

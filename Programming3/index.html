@@ -28,10 +28,13 @@
          <div class="content">
            <div class="close-btn" onclick="togglePopup()">&times;</div>
            <h1>Ինֆորմացիա խաղի մասին</h1>
-           <p><b>Խոտ</b> - բազմանում են մոտակա 8 վանդակներում<br>
-            <b>Խոտակեր</b> - ապրում են խոտեր ուտելով, բազմանում երբ էներգիան հասնում է 18-ի և մեռնում, երբ 0 է դառնում<br>
-            <b>Գիշատիչ</b> - ուտում են խոտակերներին և խոտերին, բազմանում են երբ էներգիան հասնում է 18-ի և մեռնում, երբ 0 է դառնում<br>
-            <b>Քչակեր</b> - ոտում է ցանկացած կերպարի, կորցնելով իր էներգիան, մեռնում երբ էներգիան 0 է դառնում, սկզբանական էներգիան՝ 5</p>
+           <p><b>Խոտ</b> - բազմանում են մոտակա 8 վանդակներում:<br>
+            <b>Խոտակեր</b> - ապրում են խոտեր ուտելով, բազմանում երբ էներգիան հասնում է 18-ի և մեռնում, երբ 0 է դառնում:<br>
+            <b>Գիշատիչ</b> - ուտում են խոտակերներին և խոտերին, բազմանում են երբ էներգիան հասնում է 18-ի և մեռնում, երբ 0 է դառնում:<br>
+            <b>Քչակեր</b> - ոտում է ցանկացած կերպարի, կորցնելով իր էներգիան, մեռնում երբ էներգիան 0 է դառնում, սկզբանական էներգիան՝ 5:<br>
+            <b>Էներգիա</b> - առանձնապես ֆունկցիա չի կատարում, բայց իրեն ուտելիս խոտակերն ու գիշատիչը ստանում են 3 էներգիա, իսկ եթե նրան հանկարծ ուտի քչակերը, միանգամից կմահանա: <br>
+
+         </p>
          </div>
        </div>
       <div class="info">
@@ -40,12 +43,14 @@
          <p id="GrassEaterCount"></p>
          <p id="PredatorCount"></p>
          <p id="MiniEaterCount"></p>
+         <p id="EnergyCount"></p>
       </div>
       <div class="btns">
          <button id="btn1" class="btn" onclick="GrassCreator()">Create grass</button>
          <button id="btn2" class="btn" onclick="GrassEaterCreator()">Create grass eater</button>
          <button id="btn3" class="btn" onclick="PredatorCreator()">Create predator</button>
          <button id="btn5" class="btn" onclick="MiniEaterCreator()">Create Minieater</button>
+         <button id="btn6" class="btn" onclick="EnergyCreator()">Create Energy</button>
       </div>
    </div>
 

@@ -6,6 +6,8 @@ var server = require('http').createServer(app);
 
 var io = require('socket.io')(server);
 var fs = require('fs');
+
+Energy = require('./Programming3/energy');
 Grass = require("./Programming3/grass")
 GrassEater = require("./Programming3/grassEater")
 Predator = require("./Programming3/predator")
@@ -19,6 +21,7 @@ grassEaterArr = [];
 PredatorArr = [];
 BombArr = [];
 MiniEaterArr = [];
+EnergyArr = [];
 weathers = ["Spring","Autumn", "Winter"]
 currentWeather = "Spring"
 index = 0
@@ -94,6 +97,17 @@ function createMiniEater() {
         }
     }
 }
+function createEnergy() {
+    for (let i = 0; i <= 4; i++) {
+        let x = Math.floor(Math.random() * (matrix.length));
+        let y = Math.floor(Math.random() * (matrix[0].length));
+        if (matrix[y][x] == 0 || matrix[y][x] == 1) {
+            matrix[y][x] = 6;
+            let energy = new Energy(x, y)
+            EnergyArr.push(energy)
+        }
+    }
+}
 
 function generate(matLen) {
     let matrix = [];
@@ -129,6 +143,10 @@ function updateObjects(matrix) {
                 let minieater = new MiniEater(x, y)
                 MiniEaterArr.push(minieater);
             }
+            else if (matrix[y][x] == 6) {
+                let energy = new Energy(x, y)
+                EnergyArr.push(energy);
+            }
         }
     }
     io.sockets.emit('matrixUpd', matrix)
@@ -146,7 +164,8 @@ function updStats() {
         'GrassCount': grassArr.length,
         'GrassEaterCount': grassEaterArr.length,
         'PredatorCount': PredatorArr.length,
-        'MiniEaterCount': MiniEaterArr.length
+        'MiniEaterCount': MiniEaterArr.length,
+        'EnergyCount': EnergyArr.length
     }
     stats.push(statsObject);
     fs.writeFileSync(fileName, JSON.stringify(stats, null, 4));
@@ -183,6 +202,7 @@ io.on("connection", function (socket) {
     PredatorArr = [];
     BombArr = [];
     MiniEaterArr = [];
+    EnergyArr = [];
     weathers = ["Spring","Autumn", "Winter"]
     currentWeather = "Spring"
     index = 0
@@ -193,6 +213,7 @@ io.on("connection", function (socket) {
     socket.on('PredatorCreator', createPredator)
     socket.on('BombCreator', createBomb)
     socket.on('MiniEaterCreator', createMiniEater)
+    socket.on('EnergyCreator', createEnergy)
 })
 setInterval(game, 75);
 setInterval(changeWeather, 4000)
