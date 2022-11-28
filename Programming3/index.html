@@ -18,7 +18,22 @@
 </head>
 
 <body>
+   <div class="events">
+      <button class="popupBtn" onclick="togglePopup()">Info</button>
+      <button id="btn4" class="popupBtn" onclick="BombCreator()">BOOM!</button>
+    </div>
    <div class="main">
+      <div class="popup" id="popup-1">
+         <div class="overlay"></div>
+         <div class="content">
+           <div class="close-btn" onclick="togglePopup()">&times;</div>
+           <h1>Ինֆորմացիա խաղի մասին</h1>
+           <p><b>Խոտ</b> - բազմանում են մոտակա 8 վանդակներում<br>
+            <b>Խոտակեր</b> - ապրում են խոտեր ուտելով, բազմանում երբ էներգիան հասնում է 18-ի և մեռնում, երբ 0 է դառնում<br>
+            <b>Գիշատիչ</b> - ուտում են խոտակերներին և խոտերին, բազմանում են երբ էներգիան հասնում է 18-ի և մեռնում, երբ 0 է դառնում<br>
+            <b>Քչակեր</b> - ոտում է ցանկացած կերպարի, կորցնելով իր էներգիան, մեռնում երբ էներգիան 0 է դառնում, սկզբանական էներգիան՝ 5</p>
+         </div>
+       </div>
       <div class="info">
          <p id="weather"></p>
          <p id="GrassCount"></p>
@@ -30,10 +45,10 @@
          <button id="btn1" class="btn" onclick="GrassCreator()">Create grass</button>
          <button id="btn2" class="btn" onclick="GrassEaterCreator()">Create grass eater</button>
          <button id="btn3" class="btn" onclick="PredatorCreator()">Create predator</button>
-         <button id="btn4" class="btn" onclick="BombCreator()">Create bomb</button>
          <button id="btn5" class="btn" onclick="MiniEaterCreator()">Create Minieater</button>
       </div>
    </div>
+
 </body>
 
 </html>

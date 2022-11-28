@@ -1,5 +1,6 @@
 *{
     font-family: 'Concert One', cursive;
+    box-sizing: border-box  ;
 }
 html{
     background: rgb(2,0,36);
@@ -12,10 +13,9 @@ html{
 .btns{
     display: flex;
     justify-content: center;
-    
     flex-direction: column;
     margin-left: 100px;
-
+    margin-top: 50px;
 }
 .btn{
     height: 75px;
@@ -59,6 +59,7 @@ html{
     background-color: rgb(170, 126, 133);
 }
 #btn4{
+    width: 180px;
     background-color: rgb(49, 49, 49);
     color: white;
 }
@@ -69,12 +70,18 @@ html{
 body{
     display: flex;
     justify-content: space-around; 
-    margin-top: 40px;
+    /* margin-top: 40px; */
     margin-right: 40px;
 }
 .info{
     margin-top: 150px;
     margin-bottom: 50px;
+    margin-left: 110px;
+    padding-left: 100px;
+    width: 300px;
+    height: 250px;
+    font-size: 23px;
+    text-align: center;
 }
 .main{
     display: flex;
@@ -82,8 +89,107 @@ body{
     flex-direction: column;
     align-items: center;
     align-content: center;
+    margin-top: 210px;
 }
 #defaultCanvas0{
-    margin-top: 200px;
-    margin-left: 450px;
+    margin-top: 250px;
+    margin-left: 370px;
+}
+.popup .overlay {
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100vw;
+    height:100vh;
+    background:rgba(0,0,0,0.7);
+    z-index:1;
+    display:none;
+  }
+  
+  .popup .content {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:#fff;
+    width:500px;
+    height:350px;
+    z-index:2;
+    text-align:center;
+    padding:20px;
+    box-sizing:border-box;
+    font-family:"Open Sans",sans-serif;
+  }
+  
+  .popup .close-btn {
+    cursor:pointer;
+    position:absolute;
+    right:20px;
+    top:20px;
+    width:30px;
+    height:30px;
+    background:#222;
+    color:#fff;
+    font-size:25px;
+    font-weight:600;
+    line-height:30px;
+    text-align:center;
+    border-radius:50%;
+  }
+  
+  .popup.active .overlay {
+    display:block;
+  }
+  
+  .popup.active .content {
+    transition:all 300ms ease-in-out;
+    transform:translate(-50%,-50%) scale(1);
+  }
+  
+  .popupBtn{
+    width: 100px;
+    color:#222;
+    background-color:rgb(109, 228, 13);
+    font-size: 27px;
+    border-radius: 25px;
+    border-width: 5px;
+    cursor: pointer;
+    box-shadow: 0 9px rgb(83, 83, 83);
+    transition: all 0.8s;
+    /* margin-bottom: 100px; */
+    /* margin-right: 40px; */
+    margin-left: 30px;
+  }
+  .popupBtn:active{
+        transition: none;
+        box-shadow: 0 5px rgb(83, 83, 83);
+        transform: translateY(4px);
+  }
+.events{
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50px;
+    margin-left: 30px;
+  }
+#GrassCount{
+    background-color: rgb(109, 252, 109);
+    border-radius: 5px;
+}
+#GrassEaterCount{
+    background-color: rgb(253, 186, 62);
+    border-radius: 5px;
+}
+#PredatorCount{
+    background-color: rgb(255, 82, 82);
+    border-radius: 5px;
+}
+#MiniEaterCount{
+    background-color: lightcoral;
+    border-radius: 5px;
+}
+#weather{
+    font-size: 26px;
 }

@@ -183,8 +183,8 @@ io.on("connection", function (socket) {
     PredatorArr = [];
     BombArr = [];
     MiniEaterArr = [];
-    weathers = ["spring","autumn", "winter"]
-    currentWeather = ""
+    weathers = ["Spring","Autumn", "Winter"]
+    currentWeather = "Spring"
     index = 0
     stats = [];
     updateObjects(matrix);
