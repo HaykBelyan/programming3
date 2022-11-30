@@ -188,6 +188,9 @@ function game() {
     for (let i in MiniEaterArr) {
         MiniEaterArr[i].eat();
     }
+    for (let i in EnergyArr) {
+        EnergyArr[i].check();
+    }
     data = {
         'weather': currentWeather,
         'matrix': matrix

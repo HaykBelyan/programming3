@@ -46,28 +46,28 @@ module.exports = class Bomb extends LC{
                             break;
                         }
                     }
-                    if (matrix[y][x] == 1) {
-                        for (var i in grassEaterArr) {
-                            if (x == grassEaterArr[i].x && y == grassEaterArr[i].y) {
-                                grassEaterArr.splice(i, 1);
-                                break;
-                            }
+                }
+                if (matrix[y][x] == 2) {
+                    for (var i in grassEaterArr) {
+                        if (x == grassEaterArr[i].x && y == grassEaterArr[i].y) {
+                            grassEaterArr.splice(i, 1);
+                            break;
                         }
                     }
-                    if (matrix[y][x] == 1) {
-                        for (var i in PredatorArr) {
-                            if (x == PredatorArr[i].x && y == PredatorArr[i].y) {
-                                PredatorArr.splice(i, 1);
-                                break;
-                            }
+                }
+                if (matrix[y][x] == 3) {
+                    for (var i in PredatorArr) {
+                        if (x == PredatorArr[i].x && y == PredatorArr[i].y) {
+                            PredatorArr.splice(i, 1);
+                            break;
                         }
                     }
-                    if (matrix[y][x] == 1) {
-                        for (var i in MiniEaterArr) {
-                            if (x == MiniEaterArr[i].x && y == MiniEaterArr[i].y) {
-                                MiniEaterArr.splice(i, 1);
-                                break;
-                            }
+                }
+                if (matrix[y][x] == 4) {
+                    for (var i in MiniEaterArr) {
+                        if (x == MiniEaterArr[i].x && y == MiniEaterArr[i].y) {
+                            MiniEaterArr.splice(i, 1);
+                            break;
                         }
                     }
                 }
