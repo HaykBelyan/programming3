@@ -47,7 +47,8 @@ module.exports = class Bomb extends LC{
                         }
                     }
                 }
-                if (matrix[y][x] == 2) {
+                else if (matrix[y][x] == 2) {
+                    matrix[y][x] = 0;
                     for (var i in grassEaterArr) {
                         if (x == grassEaterArr[i].x && y == grassEaterArr[i].y) {
                             grassEaterArr.splice(i, 1);
@@ -55,7 +56,8 @@ module.exports = class Bomb extends LC{
                         }
                     }
                 }
-                if (matrix[y][x] == 3) {
+                else if (matrix[y][x] == 3) {
+                    matrix[y][x] = 0;
                     for (var i in PredatorArr) {
                         if (x == PredatorArr[i].x && y == PredatorArr[i].y) {
                             PredatorArr.splice(i, 1);
@@ -63,7 +65,8 @@ module.exports = class Bomb extends LC{
                         }
                     }
                 }
-                if (matrix[y][x] == 4) {
+                else if (matrix[y][x] == 4) {
+                    matrix[y][x] = 0;
                     for (var i in MiniEaterArr) {
                         if (x == MiniEaterArr[i].x && y == MiniEaterArr[i].y) {
                             MiniEaterArr.splice(i, 1);

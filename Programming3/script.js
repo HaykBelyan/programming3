@@ -30,7 +30,7 @@ function dr(data) {
     if (matrix != undefined) {
         for (var y = 0; y < matrix.length; y++) {
             for (var x = 0; x < matrix[y].length; x++) {
-
+                bluue = color(0, 200, 255)
                 if (matrix[y][x] == 0) {
                     fill("#acacac");
                 }
@@ -58,7 +58,7 @@ function dr(data) {
                     fill("pink")
                 }
                 else if (matrix[y][x] == 6) {
-                    fill("lightblue")
+                    fill(bluue)
                 }
                 rect(x * side, y * side, side, side);
             }
