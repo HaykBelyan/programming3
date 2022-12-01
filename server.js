@@ -13,7 +13,7 @@ GrassEater = require("./Programming3/grassEater")
 Predator = require("./Programming3/predator")
 MiniEater = require("./Programming3/miniEater")
 Bomb = require("./Programming3/bomb")
-
+Virus = require("./Programming3/virus")
 
 matrix = generate(20);
 grassArr = [];
@@ -22,6 +22,7 @@ PredatorArr = [];
 BombArr = [];
 MiniEaterArr = [];
 EnergyArr = [];
+VirusArr = [];
 weathers = ["Spring","Autumn", "Winter"]
 currentWeather = "Spring"
 index = 0
@@ -108,6 +109,17 @@ function createEnergy() {
         }
     }
 }
+function createVirus() {
+    for (let i = 0; i <= 4; i++) {
+        let x = Math.floor(Math.random() * (matrix.length));
+        let y = Math.floor(Math.random() * (matrix[0].length));
+        if (matrix[y][x] == 0 || matrix[y][x] == 1) {
+            matrix[y][x] = 7;
+            let virus = new Virus(x, y)
+            VirusArr.push(virus)
+        }
+    }
+}
 
 function generate(matLen) {
     let matrix = [];
@@ -146,6 +158,10 @@ function updateObjects(matrix) {
             else if (matrix[y][x] == 6) {
                 let energy = new Energy(x, y)
                 EnergyArr.push(energy);
+            }
+            else if (matrix[y][x] == 7) {
+                let virus = new Virus(x, y)
+                VirusArr.push(virus);
             }
         }
     }
@@ -191,6 +207,9 @@ function game() {
     for (let i in EnergyArr) {
         EnergyArr[i].check();
     }
+    for (let i in VirusArr) {
+        VirusArr[i].eat();
+    }
     data = {
         'weather': currentWeather,
         'matrix': matrix
@@ -206,6 +225,7 @@ io.on("connection", function (socket) {
     BombArr = [];
     MiniEaterArr = [];
     EnergyArr = [];
+    VirusArr = [];
     weathers = ["Spring","Autumn", "Winter"]
     currentWeather = "Spring"
     index = 0
@@ -217,6 +237,7 @@ io.on("connection", function (socket) {
     socket.on('BombCreator', createBomb)
     socket.on('MiniEaterCreator', createMiniEater)
     socket.on('EnergyCreator', createEnergy)
+    socket.on('VirusCreator', createVirus)
 })
 setInterval(game, 75);
 setInterval(changeWeather, 4000)

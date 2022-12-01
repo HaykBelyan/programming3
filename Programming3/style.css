@@ -72,6 +72,12 @@ html{
 #btn6:hover{
     background-color: rgb(0, 170, 212);
 }
+#btn7{
+    background-color: rgb(21, 255, 0);
+}
+#btn7:hover{
+    background-color: rgb(14, 163, 0);
+}
 
 body{
     display: flex;

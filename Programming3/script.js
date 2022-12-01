@@ -60,6 +60,9 @@ function dr(data) {
                 else if (matrix[y][x] == 6) {
                     fill(bluue)
                 }
+                else if (matrix[y][x] == 7) {
+                    fill("lightgreen")
+                }
                 rect(x * side, y * side, side, side);
             }
         }
@@ -86,6 +89,9 @@ function MiniEaterCreator() {
 }
 function EnergyCreator() {
     socket.emit("EnergyCreator")
+}
+function VirusCreator() {
+    socket.emit("VirusCreator")
 }
 function Popup() {
     socket.emit("popup")
