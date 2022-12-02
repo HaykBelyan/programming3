@@ -15,11 +15,13 @@ function writeStats(statsObject) {
     PredatorCount = statsObject.PredatorCount
     MiniEaterCount = statsObject.MiniEaterCount
     EnergyCount = statsObject.EnergyCount
+    VirusCount = statsObject.VirusCount
     document.getElementById("GrassCount").innerText = "Grass: " + GrassCount.toString();
     document.getElementById("GrassEaterCount").innerText = "GrassEater: " + GrassEaterCount.toString();
     document.getElementById("PredatorCount").innerText = "Predator: " + PredatorCount.toString();
     document.getElementById("MiniEaterCount").innerText = "MiniEater: " + MiniEaterCount.toString();
     document.getElementById("EnergyCount").innerText = "Energy: " + EnergyCount.toString();
+    document.getElementById("VirusCount").innerText = "Virus: " + VirusCount.toString();
 }
 function dr(data) {
     var matrix = data.matrix;
@@ -62,6 +64,9 @@ function dr(data) {
                 }
                 else if (matrix[y][x] == 7) {
                     fill("lightgreen")
+                }
+                else if (matrix[y][x] == 8) {
+                    fill("brown")
                 }
                 rect(x * side, y * side, side, side);
             }
